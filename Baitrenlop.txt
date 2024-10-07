@@ -1,0 +1,64 @@
+CREATE TABLE student (
+    student_id   INTEGER PRIMARY KEY,
+    name         TEXT,
+    surname      TEXT,
+    dateOfBirth  TEXT,
+    yearEnrolled INTEGER
+);
+
+CREATE TABLE course (
+    course_id   INTEGER PRIMARY KEY,
+    name         TEXT,
+    creditPoints INTEGER,
+    yearCommenced INTEGER
+);
+
+
+CREATE TABLE staff (
+    course_id   employee_id PRIMARY KEY,
+    name    TEXT,
+    surname TEXT,
+    jobTitle TEXT
+);
+
+CREATE TABLE program (
+    program_id PRIMARY KEY,
+    name TEXT,    
+    creditPoints    INTERGER,
+    yearCommenced INTERGER
+);
+
+--5
+select *
+from student
+where name like 'H%';
+--6
+SELECT *
+FROM student
+WHERE (2024 - yearEnrolled) = 4;
+--7
+SELECT *
+FROM course
+ORDER BY creditPoints DESC;
+--8
+update student
+set name = ' Adam'
+where student_id =(SELECT Min(student_id) FROM student);
+--9
+UPDATE course
+SET name = UPPER(name);
+--10
+DELETE FROM student
+WHERE student_id = (
+    SELECT student_id
+    FROM student
+    ORDER BY dateOfBirth ASC
+    LIMIT 1
+);
+--11
+ALTER TABLE course
+DROP COLUMN yearCommenced;
+--12
+ALTER TABLE staff
+RENAME TO employee;
+
